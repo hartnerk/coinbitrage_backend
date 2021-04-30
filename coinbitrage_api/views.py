@@ -15,8 +15,13 @@ from django.views.decorators.csrf import csrf_exempt
 import requests
 import os
 from twilio.rest import Client
+import os
+import environ
 
-
+account_sid = os.environ['TWILIO_ACCOUNT_SID']
+auth_token = os.environ['TWILIO_AUTH_TOKEN']
+X_CW_API_KEY = os.environ['X_CW_API_KEY']
+PHONE_NUMBER = os.environ['PHONE_NUMBER']
 
 # Create your views here.
 @api_view(['GET'])
@@ -101,11 +106,13 @@ def sendText(exchange_array, user):
             valueone=exchange_array['exachnge_prices'][0]['rate']
             valuetwo=exchange_array['exachnge_prices'][-1]['rate']
             if(((valuetwo-valueone)/((valueone+valuetwo)/2)*100)>alert['fields']['threshold']):
-                client = Client('ACc7379fcfbd415adb1a970e2e22d48bf1', 'f4d8fa58d080b6ebd840bbb8d9d69e12')
+                print(account_sid)
+                print(auth_token)
+                client = Client(account_sid, auth_token)
                 message = client.messages.create(  
                                             messaging_service_sid='MG5450e28b8d71ce150a530845df0caa76',
                                             body='well',       
-                                            to='+12039199046' 
+                                            to=PHONE_NUMBER
                                         ) 
                 print(message.sid)
     return 
@@ -144,7 +151,7 @@ def best_arbitrage(request, coin_id):
     except ValidationError as v:
         print("validation error", v)
     
-    header={'X-CW-API-Key': '328EQEN8U3KA6QYF6BT2'}
+    header={'X-CW-API-Key': X_CW_API_KEY}
 
     r = requests.get('https://api.cryptowat.ch/markets/prices',  headers=header)
     json_response = r.json()
