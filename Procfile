@@ -1,1 +1,1 @@
-web: gunicorn coinbitrage.wsgi
+web: gunicorn backend.wsgi
