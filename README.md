@@ -1,4 +1,4 @@
-# Coin bitrage backend
+# Coinbitrage backend
 
 Using cryptowat.ch and twilio API to pull prices of coins and compare across  exchanges and to send messages when a percent difference threshold is met.  Django used for back end. Auth uses JWT tokens (get http://localhost:8000/token-auth/ )
 
