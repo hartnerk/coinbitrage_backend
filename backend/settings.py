@@ -54,7 +54,7 @@ REST_FRAMEWORK = {
     ),
 }
 
-CORS_ORIGIN_WHITELIST = ['https://localhost:3000','http://localhost:3000']
+CORS_ORIGIN_WHITELIST = ['https://coinbitragefrontend.herokuapp.com','https://coinbitragefrontend.herokuapp.com']
 
 JWT_AUTH = {
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'backend.utils.my_jwt_response_handler'
